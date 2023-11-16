@@ -23,7 +23,6 @@ public class GameController {
 
   @Autowired
   private GameRepository gameRepository;
-
   @Autowired
   private GameService gameService;
 
