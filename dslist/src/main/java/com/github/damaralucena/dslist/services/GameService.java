@@ -3,6 +3,7 @@ package com.github.damaralucena.dslist.services;
 import com.github.damaralucena.dslist.dto.GameDTO;
 import com.github.damaralucena.dslist.dto.GameMinDTO;
 import com.github.damaralucena.dslist.entities.Game;
+import com.github.damaralucena.dslist.projections.GameMinProjection;
 import com.github.damaralucena.dslist.repository.GameRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class GameService {
     List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
 
     return dto;
-
   }
+
+  @Transactional(readOnly = true)
+  public List<GameMinDTO> findByList(Long listId){
+    List<GameMinProjection> result = gameRepository.searchByList(listId);
+    return result.stream().map(x -> new GameMinDTO(x)).toList();
+  }
+
 }
